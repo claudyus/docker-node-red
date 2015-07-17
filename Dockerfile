@@ -1,11 +1,11 @@
 FROM google/nodejs
 
-RUN npm install -g node-red node-red-admin randomstring
+RUN npm install -g node-red node-red-admin
 
 WORKDIR /app
 ADD . /app
 
-RUN node /app/password.js
+RUN npm install bcryptjs randomstring && node /app/password.js
 
 EXPOSE 1880
 
