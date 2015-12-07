@@ -1,4 +1,4 @@
-FROM google/nodejs
+FROM node:0.10
 
 RUN npm install -g node-red node-red-admin node-red-node-mongodb
 
