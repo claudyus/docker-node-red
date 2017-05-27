@@ -2,9 +2,9 @@ var bcrypt = require('bcryptjs')
 var fs = require('fs')
 var randomstring = require("randomstring");
 
-pass = randomstring.generate(7);
+pass = randomstring.generate(10);
 
-console.log("************* YOUR ROOT PASS ******************")
+console.log("************* YOUR ADMIN PASS ******************")
 console.log(pass)
 console.log("***********************************************")
 

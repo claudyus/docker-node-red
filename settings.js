@@ -3,7 +3,7 @@ module.exports = {
   adminAuth: {
     type: "credentials",
     users: [{
-      username: "root",
+      username: "admin",
       password: "PASS",
       permissions: "*"
     }]
