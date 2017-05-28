@@ -8,9 +8,10 @@ if [[ -n $NODES_URL_FILE ]]; then
 fi
 
 # we are going to use this in user-auth. install locally
-npm install bcryptjs randomstring when
-if [[ $AUTH_METHOD == "http" ]]; then
+npm install bcryptjs randomstring when request
+if [[ -n $AUTH_URL ]]; then
     echo "Using http based auth!"
+    export AUTH_METHOD="http";
 else
     export AUTH_METHOD="passwd";
     node /app/gen_password.js
