@@ -10,9 +10,9 @@ var check_marray = function(array, string){
   // check for the presence of an element of `array`
   // inside `string` and return true
   var upperString = string.toUpperCase()
-  for (elem in array) {
-    if (upperString.indexOf(elem.toUpperCase()) == -1) {
-      debug("Found " + elem + " in response")
+  for (var idx in array) {
+    if (upperString.indexOf(array[idx].toUpperCase()) != -1) {
+      debug("Found " + array[idx] + " in response")
       return true
     }
   }
@@ -65,7 +65,6 @@ module.exports = {
               // we assume that the login was succesfull, this is prone to false-positive
               resolve({username: username, permissions: "*"});
             }
-
           }
         });
       } else {
