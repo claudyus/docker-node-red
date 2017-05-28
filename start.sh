@@ -7,12 +7,13 @@ if [[ -n $NODES_URL_FILE ]]; then
     cat /tmp/nodes_file.txt | xargs npm install -g
 fi
 
+# we are going to use this in user-auth. install locally
+npm install bcryptjs randomstring when
 if [[ $AUTH_METHOD == "http" ]]; then
     echo "Using http based auth!"
 else
     export AUTH_METHOD="passwd";
-    npm install bcryptjs randomstring
-    grep 'PASS' settings.js && node /app/gen_password.js
+    node /app/gen_password.js
 fi
 
 
