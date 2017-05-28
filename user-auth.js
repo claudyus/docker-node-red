@@ -2,6 +2,7 @@ var bcrypt = require('bcryptjs');
 var fs = require('fs')
 var request = require('request');
 var when = require("when");
+var debug = require("debug")('user-auth');
 
 var fail_words = ["Invalid", "Failed", "Cannot", "Unauthorized", "Not Authorized"]
 
@@ -11,6 +12,7 @@ var check_marray = function(array, string){
   var upperString = string.toUpperCase()
   for (elem in array) {
     if (upperString.indexOf(elem.toUpperCase()) == -1) {
+      debug("Found " + elem + " in response")
       return true
     }
   }
@@ -21,19 +23,21 @@ module.exports = {
   type: "credentials",
   users: function(username) {
       return when.promise(function(resolve) {
-        var user = { username: "admin", permissions: "*" };
+        var user = { username: username, permissions: "*" };
         resolve(user);
        });
   },
   authenticate: function(username, password) {
     return when.promise(function(resolve) {
       // Implement passwd based auth
+      debug("Auth method set to " + process.env.AUTH_METHOD)
       if (process.env.AUTH_METHOD == 'passwd') {
         fs.readFile('.passwd', 'utf8', function(err, h_passwd){
           if (bcrypt.compareSync(password, h_passwd)) {
             resolve ({username: 'admin', permissions: "*"});
           } else {
             // Password mishmatch
+            debug("Login failed for user " + username)
             resolve(null)
           }
         })
@@ -49,11 +53,13 @@ module.exports = {
           if (response.statusCode > 300){
             // login fails if status code is > 300, like website that return 401 or 403
             // those website are not common as per https://core.trac.wordpress.org/ticket/25446
+            debug("Login failed for user " + username + " http statusCode is " + response.statusCode)
             resolve(null);
           } else {
             // if statusCode is 200 we could attempt to detect some words inside
             // http body to recognize failed login
             if (check_marray(fail_words, body)) {
+              debug("Login failed for user " + username + " due to response content")
               resolve(null)
             } else {
               // we assume that the login was succesfull, this is prone to false-positive

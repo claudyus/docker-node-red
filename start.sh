@@ -8,7 +8,7 @@ if [[ -n $NODES_URL_FILE ]]; then
 fi
 
 # we are going to use this in user-auth. install locally
-npm install bcryptjs randomstring when request
+npm install bcryptjs randomstring when request debug
 if [[ -n $AUTH_URL ]]; then
     echo "Using http based auth!"
     export AUTH_METHOD="http";
