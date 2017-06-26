@@ -18,4 +18,4 @@ else
 fi
 
 
-node-red -s /app/settings.js
+node-red -s /app/settings.json

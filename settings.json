@@ -1,0 +1,18 @@
+{
+    "httpAdminRoot":"/red/",
+    "uiPort": 5000,
+    "httpNodeRoot": "/api",
+    "userDir":".nodered/",
+    "flowFile": "flows.json",
+    "flowFilePretty": true,
+    "editorTheme": {
+      "page": {
+        "css": "/app/css/node-red.css"
+      },
+      "header": {
+          "title": " ",
+          "image": null,
+          "url": "#"
+      }
+    }
+}
