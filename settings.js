@@ -22,6 +22,7 @@ var check_marray = function(array, string){
 module.exports = {
   uiPort: process.env.PORT || 5000,
   userDir: "/app/config",
+if (! process.env.NO_AUTH ) {
   adminAuth:  {
     type: "credentials",
     users: function(username) {
