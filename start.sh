@@ -7,6 +7,11 @@ if [[ -n $NODES_URL_FILE ]]; then
     cat /tmp/nodes_file.txt | xargs npm install -g
 fi
 
+if [[ -f /app/config/extra_modules.txt ]]; then
+    cat /app/config/extra_modules.txt | xargs npm install -g
+    mv /app/config/extra_modules.txt /app/config/extra_modules.installed
+fi
+
 # we are going to use this in user-auth. install locally
 npm install bcryptjs randomstring when request debug
 if [[ -n $AUTH_URL ]]; then

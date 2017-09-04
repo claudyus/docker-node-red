@@ -11,7 +11,18 @@ The following env vars are used to configure the container:
   - NO_AUTH: if set disable any authentication methods
   - NODES_URL_FILE: a file url to configure additional nodes from npm
 
+You can also add a 'extra_modules.txt' inside '/app/config' with a list of flow extra.
+
 TODO
 ----
 [ ] implement flows backup/restore
 [ ] allow template/css personalization
+
+Dokku
+-------------
+
+If used inside dokku you can mount the volume using the following command
+
+::
+
+  dokku storage:mount $APP /var/lib/dokku/data/storage/$APP:/app/.nodered/
