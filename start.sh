@@ -22,5 +22,7 @@ else
     node /app/gen_password.js
 fi
 
+# workaround node-red-admin port
+sed -i 's/1880/5000/g' /usr/local/lib/node_modules/node-red-admin/lib/config.js
 
 node-red -s /app/settings.json
