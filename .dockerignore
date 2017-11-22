@@ -1,3 +1,5 @@
 node_modules/*
 .passwd
+.gitlab-ci.yml
+*.tar
 .nodered/*
