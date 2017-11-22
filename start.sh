@@ -15,14 +15,20 @@ fi
 # we are going to use this in user-auth. install locally
 npm install bcryptjs randomstring when request debug
 if [[ -n $AUTH_URL ]]; then
-    echo "Using http based auth!"
     export AUTH_METHOD="http";
-else
-    export AUTH_METHOD="passwd";
+    echo "Using http based auth!"
+    cp /app/settings_http.js /app/settings.js
+fi
+if [[ "$AUTH_METHOD" == "passwd" ]]; then
+    echo "Using passwd based auth!"
     node /app/gen_password.js
+fi
+if [[ -n "$NO_AUTH" ]]; then
+    echo "*** WARNING: Disable auth ***"
+    export AUTH_METHOD="noauth"
 fi
 
 # workaround node-red-admin port
 sed -i 's/1880/5000/g' /usr/local/lib/node_modules/node-red-admin/lib/config.js
 
-node-red -s /app/settings.json
+node-red -s /app/settings.js
