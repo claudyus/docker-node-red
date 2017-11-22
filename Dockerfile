@@ -1,5 +1,6 @@
-FROM node:6.6-slim
+FROM node:9.2-alpine
 
+RUN apk update && apk add bash
 RUN npm install -g node-red node-red-admin
 
 WORKDIR /app
