@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set -xe
 
 
 if [[ -n $NODES_URL_FILE ]]; then

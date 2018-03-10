@@ -1,6 +1,6 @@
-FROM node:9.2-alpine
+FROM node:alpine
 
-RUN apk update && apk add bash
+RUN apk update && apk add bash ca-certificates
 RUN npm install -g node-red node-red-admin
 
 WORKDIR /app
