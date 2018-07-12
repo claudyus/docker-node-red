@@ -1,7 +1,6 @@
 #!/bin/bash
 set -xe
 
-
 if [[ -n $NODES_URL_FILE ]]; then
     wget $NODES_URL_FILE -O /tmp/nodes_file.txt
     cat /tmp/nodes_file.txt | xargs npm install -g
@@ -17,7 +16,6 @@ npm install bcryptjs randomstring when request debug
 if [[ -n $AUTH_URL ]]; then
     export AUTH_METHOD="http";
     echo "Using http based auth!"
-    cp /app/settings_http.js /app/settings.js
 fi
 if [[ "$AUTH_METHOD" == "passwd" ]]; then
     echo "Using passwd based auth!"
@@ -28,7 +26,4 @@ if [[ -n "$NO_AUTH" ]]; then
     export AUTH_METHOD="noauth"
 fi
 
-# workaround node-red-admin port
-sed -i 's/1880/5000/g' /usr/local/lib/node_modules/node-red-admin/lib/config.js
-
-node-red -s /app/settings.js
+node-red -s /app/settings.js --port $PORT
