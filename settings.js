@@ -16,7 +16,7 @@ module.exports = function () {
       }
     }
   }
-  if (process.env.AUTH_METHOD != 'noauth')
+  if (process.env.AUTH_METHOD && process.env.AUTH_METHOD !== 'noauth')
     obj['adminAuth']= require('./settings_' + process.env.AUTH_METHOD + '.js')
 
   return obj

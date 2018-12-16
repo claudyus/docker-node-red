@@ -13,17 +13,21 @@ fi
 
 # we are going to use this in user-auth. install locally
 npm install bcryptjs randomstring when request debug
-if [[ -n $AUTH_URL ]]; then
+if [[ -n "$NO_AUTH" ]]; then
+    # if NO_AUTH env is set
+    echo "*** WARNING: Disable auth ***"
+    export AUTH_METHOD="noauth"
+elif [[ -n $AUTH_URL ]]; then
+    # if AUTH_METHOD == http
     export AUTH_METHOD="http";
     echo "Using http based auth!"
-fi
-if [[ "$AUTH_METHOD" == "passwd" ]]; then
+else
+    # set default auth method if nothing else defined
+    export AUTH_METHOD="passwd"
     echo "Using passwd based auth!"
     node /app/gen_password.js
 fi
-if [[ -n "$NO_AUTH" ]]; then
-    echo "*** WARNING: Disable auth ***"
-    export AUTH_METHOD="noauth"
-fi
 
-node-red -s /app/settings.js --port $PORT
+env
+echo "debug: Starting nodered... "
+node-red -s /app/settings.js
