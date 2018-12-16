@@ -1,14 +1,13 @@
-FROM node:8-alpine
+FROM node:lts-alpine
 
 WORKDIR /app
 
 RUN apk add --update bash ca-certificates
-RUN npm install -g node-red@0.18.5
+RUN npm install -g --unsafe-perm node-red@0.19.5
 
 ADD . /app
 
-VOLUME /app/config/
-
-STOPSIGNAL SIGINT
+# config and flows files
+VOLUME /app/.nodered/
 
 CMD /app/start.sh
